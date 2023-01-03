@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:my_first_app/app_controller.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -67,23 +68,38 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ),
                           const SizedBox(height: 15),
-                          ElevatedButton(
-                            style: TextButton.styleFrom(
-                              foregroundColor: Colors.white, backgroundColor: Colors.black,
-                            ),
-                            onPressed: (() { 
-                              if (email == 'teste@email.com' && password == '123') {
-                                Navigator.of(context).pushNamed('/home');
-                              } else {
-                                print('invalid');
-                              }
-                            }),
-                            child: const SizedBox(
-                              width: double.infinity,
-                              child: Text(
-                                'Entrar',
-                                textAlign: TextAlign.center,
-                              ),
+                          SizedBox(
+                            height: 50,
+                            // borderRadius: BorderRadius.circular(40),
+                            child: AnimatedBuilder(
+                              animation: AppController.instance,
+                              builder: (context, child) {
+                                return ElevatedButton(
+                                  style: TextButton.styleFrom(
+                                    foregroundColor: AppController.instance.isDarkTheme ? Colors.black87 : Colors.white, 
+                                    backgroundColor: AppController.instance.isDarkTheme ? Colors.white70 : Colors.black87,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(40),
+                                    ),
+                                    shadowColor: AppController.instance.isDarkTheme ? Colors.white : Colors.black,
+                                    elevation: 5.0,
+                                  ),
+                                  onPressed: (() { 
+                                    if (email == 'teste@email.com' && password == '123') {
+                                      Navigator.of(context).pushNamed('/home');
+                                    } else {
+                                      print('invalid');
+                                    }
+                                  }),
+                                  child: const SizedBox(
+                                    width: double.infinity,
+                                    child: Text(
+                                      'Entrar',
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                );
+                              },
                             ),
                           ),
                         ],
